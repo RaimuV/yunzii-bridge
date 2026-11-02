@@ -1,6 +1,6 @@
 [Unit]
 Description=YUNZII B75 Pro wired-mode HID bridge (uhid)
-Documentation=https://github.com/raimuv/yunzii-bridge
+Documentation=https://github.com/RaimuV/yunzii-bridge
 After=local-fs.target
 
 [Service]
