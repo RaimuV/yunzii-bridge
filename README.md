@@ -5,6 +5,11 @@ kernel's `usbhid` probing. Born for the wired mode of the
 **ROYUAN YUNZII B75 PRO** (`3151:4015`), but reusable for any keyboard
 with the same disease.
 
+- **Linux-only solution**: the problem manifests on Linux (the kernel
+  insists on probing the broken vendor interfaces); on Windows the OS
+  masks it and this daemon is not needed.
+- **Tested on Fedora 44** (KDE Plasma, Wayland, kernel `7.2.13`):
+  typing, boot, login screen and `Fn+Space` all verified end-to-end.
 - keyboard stays fully usable in wired mode (typing, `Fn+Space`, boot and
   login screen included)
 - no more 50–100 second stalls and disconnect loops at enumeration
@@ -115,10 +120,21 @@ Two pieces:
 
 ## Requirements
 
-- Linux
+- **Linux** (the kernel quirk and the systemd unit are Linux-specific;
+  the daemon itself could run anywhere libusb and `/dev/uhid` exist)
 - `libusb-1.0` (Fedora: `sudo dnf install libusb1-devel`)
 - C compiler, `make`
 - systemd (for the service unit; the daemon runs standalone too)
+
+### Tested on
+
+- **Fedora Linux 44**, KDE Plasma 6.7 (Wayland), kernel `7.2.13-200.fc44`
+- libusb `1.0.30`
+- device: ROYUAN YUNZII B75 PRO (`3151:4015`), firmware `1.06`
+
+The same mechanism applies to any Linux distribution: the two moving
+parts are the `usbhid.quirks` kernel parameter (any bootloader) and the
+daemon (any init system).
 
 ## Build and install
 
