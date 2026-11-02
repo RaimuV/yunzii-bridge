@@ -1,0 +1,27 @@
+[Unit]
+Description=YUNZII B75 Pro wired-mode HID bridge (uhid)
+Documentation=https://github.com/raimuv/yunzii-bridge
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/yunzii-bridge
+Restart=on-failure
+RestartSec=2
+
+# Hardening: the daemon only needs /dev/bus/usb and /dev/uhid.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+SystemCallArchitectures=native
+RestrictRealtime=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target
